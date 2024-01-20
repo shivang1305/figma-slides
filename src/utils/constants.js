@@ -3,3 +3,6 @@ export const SEARCH_IMG_URL =
 
 export const PPT_COVER_IMG_URL =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1bAZS0QGhl_aqpViL4O2ZXPJIDIpJotVYAQ&usqp=CAU";
+
+export const LOGO_URL =
+  "https://www.simplilearn.com/ice9/free_resources_article_thumb/Type_barGraph_GraphInExcel.png";
