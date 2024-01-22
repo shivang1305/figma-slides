@@ -6,7 +6,7 @@ import Footer from "./components/presentation/Footer";
 
 const App = () => {
   return (
-    <div>
+    <div className="bg-slate-100">
       <Header />
       <Slide />
       <Footer />
