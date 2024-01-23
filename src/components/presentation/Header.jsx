@@ -2,6 +2,7 @@ import React from "react";
 import { LOGO_URL } from "../../utils/constants";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import InputMenu from "./InputMenu";
 
 const Header = () => {
   return (
@@ -16,12 +17,7 @@ const Header = () => {
         <p className="font-bold ml-4 text-2xl mt-7">Weekly Business Review</p>
       </div>
 
-      <button
-        className="flex justify-center my-10 shadow-lg rounded-md border p-3 text-xl font-semibold hover:cursor-pointer"
-        onClick={() => {}}
-      >
-        New Content <MdKeyboardArrowDown className="ml-2 my-auto" />
-      </button>
+      <InputMenu />
 
       <button
         className="justify-center my-10 font-semibold hover:cursor-pointer"
