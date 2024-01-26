@@ -1,7 +1,6 @@
 import React from "react";
 import { LOGO_URL } from "../../utils/constants";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { MdKeyboardArrowDown } from "react-icons/md";
 import InputMenu from "./InputMenu";
 
 const Header = () => {
