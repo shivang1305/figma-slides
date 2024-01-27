@@ -4,6 +4,7 @@ import { useDrag } from "@use-gesture/react";
 
 const Slide = () => {
   const containerRef = useRef(null);
+  const dragElement = useRef(null);
 
   const [{ x, y, width, height }, api] = useSpring(() => ({
     x: 0,
@@ -14,28 +15,49 @@ const Slide = () => {
 
   const bind = useDrag(
     (state) => {
-      window.movement = state.movement;
-      window.offset = state.offset;
+      const isResizing = state?.event.target === dragElement.current;
 
-      api.set({
-        x: state.offset[0],
-        y: state.offset[1],
-      });
+      if (isResizing) {
+        api.set({
+          width: state.offset[0],
+          height: state.offset[1],
+        });
+      } else {
+        api.set({
+          x: state.offset[0],
+          y: state.offset[1],
+        });
+      }
     },
     {
-      from: () => {
-        return [x.get(), y.get()];
+      from: (event) => {
+        const isResizing = event.target === dragElement.current;
+
+        if (isResizing) {
+          return [width.get(), height.get()];
+        } else return [x.get(), y.get()];
       },
-      bounds: () => {
+      bounds: (state) => {
+        const isResizing = state?.event.target === dragElement.current;
+
         const containerWidth = containerRef.current?.clientWidth ?? 0;
         const containerHeight = containerRef.current?.clientHeight ?? 0;
 
-        return {
-          top: 0,
-          left: 0,
-          right: containerWidth - width.get(),
-          bottom: containerHeight - height.get(),
-        };
+        if (isResizing) {
+          return {
+            top: 70,
+            left: 80,
+            right: containerWidth - x.get(),
+            bottom: containerHeight - y.get(),
+          };
+        } else {
+          return {
+            top: 0,
+            left: 0,
+            right: containerWidth - width.get(),
+            bottom: containerHeight - height.get(),
+          };
+        }
       },
     }
   );
@@ -47,6 +69,7 @@ const Slide = () => {
     >
       <animated.div
         style={{ x, y, width, height }}
+        ref={dragElement}
         className="border-dashed border-black border absolute touch-none cursor-nwse-resize z-10"
         {...bind()}
       >
